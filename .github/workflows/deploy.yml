@@ -30,6 +30,7 @@ jobs:
         run: npm run build
         env:
           GITHUB_PAGES: true
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
