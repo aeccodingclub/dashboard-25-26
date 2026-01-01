@@ -4,6 +4,7 @@ import { ArrowRight, UserPlus } from 'lucide-react'
 import { useState, useEffect } from 'react'
 
 const HeroSection = () => {
+  const [isMounted, setIsMounted] = useState<boolean>(false)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 
   useEffect(() => {
@@ -31,17 +32,26 @@ const HeroSection = () => {
     }
   }
 
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
   return (
     <section 
       id="hero" 
-      className="relative h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-950 overflow-hidden"
+      className="relative h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-950 overflow-hidden min-w-0"
+      style={{ minWidth: '320px' }}
     >
       {/* Mouse glow effect */}
       <div 
-        className="absolute pointer-events-none transition-all duration-300 ease-out"
+        className="absolute pointer-events-none transition-all duration-300 ease-out overflow-hidden"
         style={{
-          left: mousePosition.x - 200,
-          top: mousePosition.y - 200,
+          left: isMounted 
+            ? Math.max(-200, Math.min(mousePosition.x - 200, window.innerWidth - 200))
+            : mousePosition.x - 200,
+          top: isMounted
+            ? Math.max(-200, Math.min(mousePosition.y - 200, window.innerHeight - 200))
+            : mousePosition.y - 200,
           width: '400px',
           height: '400px',
           background: 'radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(139, 92, 246, 0.1) 30%, transparent 70%)',
@@ -91,11 +101,11 @@ const HeroSection = () => {
         />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-center pt-20 pb-16">
-        <div className="text-center space-y-8">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-0 xs:px-3 sm:px-6 lg:px-8 h-full flex items-center justify-center pt-16 sm:pt-20 pb-12 sm:pb-16 min-w-0">
+        <div className="text-center space-y-6 sm:space-y-8">
           
           {/* Logo */}
-          <div className="mb-8 relative">
+          <div className="mb-6 sm:mb-8 relative">
             <div 
               className="absolute inset-0 transition-all duration-300 ease-out opacity-50"
               style={{
@@ -106,13 +116,13 @@ const HeroSection = () => {
             <img
               src="logo.svg" 
               alt="AEC Coding Club Logo" 
-              className="w-20 h-20 sm:w-28 sm:h-28 md:w-40 md:h-40 mx-auto drop-shadow-2xl relative z-10 transition-transform duration-300 hover:scale-105"
+              className="w-16 h-16 xs:w-20 xs:h-20 sm:w-28 sm:h-28 md:w-40 md:h-40 mx-auto drop-shadow-2xl relative z-10 transition-transform duration-300 hover:scale-105"
             />
           </div>
 
           {/* Animated heading */}
-          <div className="space-y-4">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 relative font-mono">
+          <div className="space-y-3 sm:space-y-4">
+            <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 relative font-mono px-1 xs:px-2 sm:px-0 break-words min-w-0" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
               <span className="relative inline-block">
                 <span className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent animate-pulse">
                   &lt;AEC Coding Club /&gt;
@@ -124,10 +134,10 @@ const HeroSection = () => {
             </h1>
             
             {/* Glassmorphic card with tagline, description and CTAs */}
-            <div className="relative mx-auto max-w-3xl">
-              <div className="absolute inset-0 bg-white/20 dark:bg-black/20 backdrop-blur-xl rounded-2xl border border-white/30 dark:border-white/10" />
-              <div className="relative py-6 px-4 sm:py-8 sm:px-8 space-y-2">
-                <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-700 dark:text-gray-200 font-medium">
+            <div className="relative mx-auto w-full max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-3xl px-1 xs:px-2 sm:px-0 min-w-0">
+              <div className="absolute inset-0 bg-white/20 dark:bg-black/20 backdrop-blur-xl rounded-xl sm:rounded-2xl border border-white/30 dark:border-white/10" />
+              <div className="relative py-4 px-2 xs:px-3 xs:py-5 sm:py-8 sm:px-8 space-y-3 sm:space-y-2 min-w-0">
+                <p className="text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl text-gray-700 dark:text-gray-200 font-medium leading-relaxed break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
                   Dream. Craft. Inspire.
                   <br />
                   <span className="text-blue-600 dark:text-blue-400 font-semibold">
@@ -136,25 +146,26 @@ const HeroSection = () => {
                 </p>
                 
                 {/* CTA Buttons inside card */}
-                <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-3 sm:pt-4 min-w-0">
                   <button 
                     onClick={() => scrollToSection('about')}
-                    className="w-full sm:w-64 md:w-72 group relative cursor-pointer bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl overflow-hidden"
+                    className="w-full max-w-xs xs:max-w-64 sm:w-64 md:w-72 mx-auto group relative cursor-pointer bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-2.5 xs:py-3 px-3 xs:px-4 sm:px-6 rounded-lg xs:rounded-xl text-sm xs:text-base transition-all duration-300 transform hover:scale-105 hover:shadow-xl overflow-hidden min-w-0"
+                    style={{ minWidth: '0', maxWidth: '100%' }}
                   >
                     <span className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
                     <span className="relative flex items-center justify-center">
                       Enter Portal
-                      <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                      <ArrowRight className="ml-2 w-3 h-3 xs:w-4 xs:h-4 group-hover:translate-x-1 transition-transform duration-300" />
                     </span>
                   </button>
 
-                  <a href="https://forms.gle/MSBW2LNa5H6aCwcs6/" target="_blank" rel="noopener noreferrer" className="w-full sm:w-64 md:w-72">
+                  <a href="https://forms.gle/MSBW2LNa5H6aCwcs6/" target="_blank" rel="noopener noreferrer" className="w-full xs:w-64 sm:w-64 md:w-72 mx-auto">
                     <button
-                      className="w-full group relative border-2 cursor-pointer border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 hover:bg-blue-600 dark:hover:bg-blue-400 hover:text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 backdrop-blur-sm bg-white/10 dark:bg-black/10"
+                      className="w-full group relative border-2 cursor-pointer border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 hover:bg-blue-600 dark:hover:bg-blue-400 hover:text-white font-bold py-2.5 xs:py-3 px-4 xs:px-6 rounded-lg xs:rounded-xl text-sm xs:text-base transition-all duration-300 transform hover:scale-105 backdrop-blur-sm bg-white/10 dark:bg-black/10"
                     >
                       <span className="relative flex items-center justify-center">
                         Join Us
-                        <UserPlus className="ml-2 w-4 h-4 group-hover:rotate-12 transition-transform duration-300" />
+                        <UserPlus className="ml-2 w-3 h-3 xs:w-4 xs:h-4 group-hover:rotate-12 transition-transform duration-300" />
                       </span>
                     </button>
                   </a>

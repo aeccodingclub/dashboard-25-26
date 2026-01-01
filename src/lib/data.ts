@@ -12,7 +12,7 @@ export const events: ClubEvent[] = [
     attendees: 0,
     maxAttendees: 60,
     color: "from-purple-500 to-indigo-600",
-    status: "upcoming"
+    status: "completed"
   },
   {
     id: 2,
@@ -25,7 +25,7 @@ export const events: ClubEvent[] = [
     attendees: 1,
     maxAttendees: 60,
     color: "from-emerald-500 to-teal-600",
-    status: "upcoming"
+    status: "completed"
   },
   {
     id: 3,
@@ -38,6 +38,6 @@ export const events: ClubEvent[] = [
     attendees: 176,
     maxAttendees: 200,
     color: "from-rose-500 to-pink-600",
-    status: "upcoming"
+    status: "completed"
   }
 ];

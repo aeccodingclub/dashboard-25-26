@@ -4,7 +4,7 @@
 
 This repository is for the Landing Page and Portal Page for **AEC Coding Club** for the session 2025-26.
 
-[GitHub Repo Link](https://github.com/aeccodingclub/Dashboard_25-26)
+[GitHub Repo Link](https://github.com/aeccodingclub/dashboard-25-26)
 
 ---
 
@@ -29,8 +29,8 @@ This repository is for the Landing Page and Portal Page for **AEC Coding Club** 
 ## Setting Up
 
 ```bash
-git clone https://github.com/aeccodingclub/Dashboard_25-26.git
-cd Dashboard_25-26
+git clone https://github.com/aeccodingclub/dashboard-25-26.git
+cd dashboard-25-26
 npm install
 npm run dev
 ```
@@ -54,20 +54,14 @@ git push -u origin branchname
 ### Landing Page
 
 - [x] **Hero Section** with **animations and CTA's**
-- [ ] Quick links for **socials**
-- [ ] Maybe **success stories**?
+- [x] Quick links for **socials**
+- [x] **Success stories**
 
 ### Portal Page
 
 - [x] **Hero section** with **monthly event schedule**
-- [ ] **Events section** (latest three with view more button)
-- [ ] **Event results** (latest three with view more button)
-- [ ] **Core team** info (and view previous core teams)
-- [ ] **Blogs** (if y'all wanna continue it?)
-- [ ] **Projects** (maybe?)
-
----
-
-## Contact
-
-For any queries about this repo: [porandip0@gmail.com](mailto:porandip0@gmail.com)
+- [x] **Events section**
+- [ ] **Event results**
+- [x] **Core team** info
+- [ ] **Blogs**
+- [x] **Projects**

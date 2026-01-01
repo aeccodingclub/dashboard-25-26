@@ -4,8 +4,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: isGitHubPages ? 'export' : 'standalone',
-  basePath: isGitHubPages ? '/Dashboad_25-26' : '',
-  assetPrefix: isGitHubPages ? '/Dashboad_25-26/' : '/',
+  basePath: isGitHubPages ? '/dashboard-25-26' : '',
+  assetPrefix: isGitHubPages ? '/dashboard-25-26/' : '/',
   trailingSlash: true,
   outputFileTracingExcludes: {
     '/api/*': ['src/app/api/**/*'],
